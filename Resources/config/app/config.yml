@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+security:
+    password_hashers:
+        bcrypt: bcrypt
+
+owl_user:
+    hasher: bcrypt
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-user:
+                namespace_prefix: "Sylius\\Component\\User"
+                path: "@OwlUserBundle/Resources/config/serializer"
