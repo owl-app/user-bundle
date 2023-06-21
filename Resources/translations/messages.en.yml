@@ -1,7 +1,7 @@
 sylius:
     form:
         user:
-            email: Email
+            email: E-mail
             enabled: Enabled
             password:
                 label: Password
