@@ -72,7 +72,12 @@ abstract class UserType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'data_class' => $this->dataClass,
-                'validation_groups' => function (FormInterface $form): array {
+                'validation_groups' => /**
+                 * @return string[]
+                 *
+                 * @psalm-return array<string>
+                 */
+                function (FormInterface $form): array {
                     $data = $form->getData();
                     if ($data && !$data->getId()) {
                         $this->validationGroups[] = 'sylius_user_create';

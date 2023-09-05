@@ -59,16 +59,20 @@ class SecurityController extends AbstractController
 
     /**
      * Login check action. This action should never be called.
+     *
+     * @return never
      */
-    public function checkAction(Request $request): Response
+    public function checkAction(Request $request)
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
 
     /**
      * Logout action. This action should never be called.
+     *
+     * @return never
      */
-    public function logoutAction(Request $request): Response
+    public function logoutAction(Request $request)
     {
         throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');
     }

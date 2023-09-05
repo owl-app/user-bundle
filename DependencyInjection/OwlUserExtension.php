@@ -54,6 +54,11 @@ final class OwlUserExtension extends AbstractResourceExtension
         $container->setParameter('owl.user_permission_providers', $config['permission_provider']);
     }
 
+    /**
+     * @return array[]
+     *
+     * @psalm-return array<string, array>
+     */
     private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('owl.user.users', $resources);

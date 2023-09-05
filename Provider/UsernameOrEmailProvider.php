@@ -17,6 +17,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
+    /**
+     * @return \Owl\Component\User\Model\UserInterface|null
+     *
+     * @psalm-return T|\Owl\Component\User\Model\UserInterface|null
+     */
     protected function findUser(string $usernameOrEmail): ?UserInterface
     {
         if (filter_var($usernameOrEmail, \FILTER_VALIDATE_EMAIL)) {

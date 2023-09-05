@@ -17,6 +17,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class EmailProvider extends AbstractUserProvider
 {
+    /**
+     * @return \Owl\Component\User\Model\UserInterface|null
+     */
     protected function findUser(string $email): ?UserInterface
     {
         return $this->userRepository->findOneByEmail($email);

@@ -51,7 +51,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
         $this->permissionProvider = $permissionProvider;
     }
 
-    public function loadUserByUsername($username): UserInterface
+    public function loadUserByUsername(string $username): UserInterface
     {
         $username = $this->canonicalizer->canonicalize($username);
         $user = $this->findUser($username);
@@ -103,7 +103,10 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
     abstract protected function findUser(string $uniqueIdentifier): ?UserInterface;
 
-    public function supportsClass($class): bool
+    /**
+     * @param get-class-of<$user, Owl\Component\User\Model\UserInterface> $class
+     */
+    public function supportsClass(string $class): bool
     {
         return $this->supportedUserClass === $class || is_subclass_of($class, $this->supportedUserClass);
     }

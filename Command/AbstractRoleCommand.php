@@ -74,6 +74,9 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
     }
 
+    /**
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');
@@ -122,6 +125,11 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         return $this->getEntityManager($userType)->getRepository($class);
     }
 
+    /**
+     * @return (int|string)[]
+     *
+     * @psalm-return list<array-key>
+     */
     protected function getAvailableUserTypes(): array
     {
         $config = $this->getContainer()->getParameter('sylius.user.users');

@@ -35,6 +35,11 @@ final class UserChangePasswordType extends AbstractResourceType
         ;
     }
 
+    /**
+     * @return string
+     *
+     * @psalm-return 'sylius_user_change_password'
+     */
     public function getBlockPrefix(): string
     {
         return 'sylius_user_change_password';

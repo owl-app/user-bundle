@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessH
 
 final class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
 {
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response|null
     {
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(['success' => true, 'username' => $token->getUsername()]);

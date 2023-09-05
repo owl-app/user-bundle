@@ -35,6 +35,11 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->userClass = $userClass;
     }
 
+    /**
+     * @return string[]
+     *
+     * @psalm-return array{'security.interactive_login': 'onSecurityInteractiveLogin', 'sylius.user.security.implicit_login': 'onImplicitLogin'}
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -43,17 +48,17 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
     }
 
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(UserEvent $event): void
     {
         $this->updateUserLastLogin($event->getUser());
     }
 
-    private function updateUserLastLogin($user): void
+    private function updateUserLastLogin(\Symfony\Component\Security\Core\User\UserInterface|null $user): void
     {
         if (!$user instanceof $this->userClass) {
             return;

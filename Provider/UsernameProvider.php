@@ -17,6 +17,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsernameProvider extends AbstractUserProvider
 {
+    /**
+     * @return \Owl\Component\User\Model\UserInterface|null
+     *
+     * @psalm-return T|null
+     */
     protected function findUser(string $username): ?UserInterface
     {
         return $this->userRepository->findOneBy(['usernameCanonical' => $username]);
