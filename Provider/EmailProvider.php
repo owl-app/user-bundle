@@ -20,7 +20,7 @@ class EmailProvider extends AbstractUserProvider
     /**
      * @return \Owl\Component\User\Model\UserInterface|null
      */
-    protected function findUser(string $email): ?UserInterface
+    protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
         return $this->userRepository->findOneByEmail($email);
     }

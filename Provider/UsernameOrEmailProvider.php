@@ -22,7 +22,7 @@ class UsernameOrEmailProvider extends AbstractUserProvider
      *
      * @psalm-return T|\Owl\Component\User\Model\UserInterface|null
      */
-    protected function findUser(string $usernameOrEmail): ?UserInterface
+    protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
         if (filter_var($usernameOrEmail, \FILTER_VALIDATE_EMAIL)) {
             return $this->userRepository->findOneByEmail($usernameOrEmail);

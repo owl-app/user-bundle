@@ -22,7 +22,7 @@ class UsernameProvider extends AbstractUserProvider
      *
      * @psalm-return T|null
      */
-    protected function findUser(string $username): ?UserInterface
+    protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
         return $this->userRepository->findOneBy(['usernameCanonical' => $username]);
     }

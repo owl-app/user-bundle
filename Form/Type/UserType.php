@@ -15,11 +15,10 @@ namespace Owl\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Owl\Bundle\UserBundle\Form\UserVerifiedAtToBooleanTransformer;
-use Sylius\Component\Core\Model\ShopUser;
+use Owl\Component\User\Model\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -50,7 +49,7 @@ abstract class UserType extends AbstractResourceType
         $builder->get('verifiedAt')->addModelTransformer(new UserVerifiedAtToBooleanTransformer(), true);
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function (FormEvent $event) {
-            /** @var ShopUser|null $data */
+            /** @var UserInterface|null $data */
             $data = $event->getData();
             if (null === $data) {
                 return;
