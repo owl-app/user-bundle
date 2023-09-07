@@ -24,26 +24,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class AbstractUserProvider implements UserProviderInterface
 {
-    /** @var string */
-    protected $supportedUserClass = UserInterface::class;
-
-    /** @var UserRepositoryInterface */
-    protected $userRepository;
-
-    /** @var CanonicalizerInterface */
-    protected $canonicalizer;
-
-    /** @var PermissionProviderInterface */
-    protected $permissionProvider;
-
     /**
      * @param string $supportedUserClass FQCN
      */
     public function __construct(
-        string $supportedUserClass,
-        UserRepositoryInterface $userRepository,
-        CanonicalizerInterface $canonicalizer,
-        PermissionProviderInterface $permissionProvider = null
+        protected string $supportedUserClass,
+        protected UserRepositoryInterface $userRepository,
+        protected CanonicalizerInterface $canonicalizer,
+        protected ?PermissionProviderInterface $permissionProvider = null
     ) {
         $this->supportedUserClass = $supportedUserClass;
         $this->userRepository = $userRepository;
@@ -103,9 +91,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
     abstract protected function findUser(string $uniqueIdentifier): ?UserInterface;
 
-    /**
-     * @param get-class-of<$user, Owl\Component\User\Model\UserInterface> $class
-     */
     public function supportsClass(string $class): bool
     {
         return $this->supportedUserClass === $class || is_subclass_of($class, $this->supportedUserClass);

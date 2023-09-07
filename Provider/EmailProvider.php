@@ -22,6 +22,6 @@ class EmailProvider extends AbstractUserProvider
      */
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
-        return $this->userRepository->findOneByEmail($email);
+        return $this->userRepository->findOneByEmail($uniqueIdentifier);
     }
 }
