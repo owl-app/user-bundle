@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\EventListener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -35,7 +35,7 @@ class PasswordUpdaterListener
 
     public function prePersist(LifecycleEventArgs $event): void
     {
-        $user = $event->getEntity();
+        $user = $event->getObject();
 
         if (!$user instanceof UserInterface) {
             return;
@@ -46,7 +46,7 @@ class PasswordUpdaterListener
 
     public function preUpdate(LifecycleEventArgs $event): void
     {
-        $user = $event->getEntity();
+        $user = $event->getObject();
 
         if (!$user instanceof UserInterface) {
             return;

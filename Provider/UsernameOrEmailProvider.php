@@ -14,20 +14,22 @@ declare(strict_types=1);
 namespace Owl\Bundle\UserBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
-    /**
-     * @return \Owl\Component\User\Model\UserInterface|null
-     *
-     * @psalm-return T|\Owl\Component\User\Model\UserInterface|null
-     */
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
         if (filter_var($uniqueIdentifier, \FILTER_VALIDATE_EMAIL)) {
-            return $this->userRepository->findOneByEmail($uniqueIdentifier);
+            $user = $this->userRepository->findOneByEmail($uniqueIdentifier);
+            Assert::nullOrIsInstanceOf($user, UserInterface::class);
+
+            return $user;
         }
 
-        return $this->userRepository->findOneBy(['username' => $uniqueIdentifier]);
+        $user = $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
+        Assert::nullOrIsInstanceOf($user, UserInterface::class);
+
+        return $user;
     }
 }

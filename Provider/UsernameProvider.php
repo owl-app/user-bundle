@@ -14,16 +14,15 @@ declare(strict_types=1);
 namespace Owl\Bundle\UserBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 class UsernameProvider extends AbstractUserProvider
 {
-    /**
-     * @return \Owl\Component\User\Model\UserInterface|null
-     *
-     * @psalm-return T|null
-     */
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
-        return $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
+        $user = $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
+        Assert::nullOrIsInstanceOf($user, UserInterface::class);
+
+        return $user;
     }
 }

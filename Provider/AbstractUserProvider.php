@@ -82,7 +82,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
         if ($reloadedUser instanceof PermissionUserInterface && $this->permissionProvider) {
             $reloadedUser->setPermissions(array_keys(
-                $this->permissionProvider->getPermissionsByUserId($reloadedUser->getId())
+                $this->permissionProvider->getPermissionsByUserId($user->getId())
             ));
         }
 

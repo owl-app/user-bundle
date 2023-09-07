@@ -15,8 +15,8 @@ final class RegisterPermissionProviderPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        $userPermissionProviders = $container->getParameter('owl.user_permission_providers');
-        $users = $container->getParameter(('owl.user.users'));
+        $userPermissionProviders = (array) $container->getParameter('owl.user_permission_providers');
+        $users = (array) $container->getParameter(('owl.user.users'));
 
         if (empty($userPermissionProviders)) {
             return;

@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\Controller;
@@ -16,8 +7,7 @@ namespace Owl\Bundle\UserBundle\Controller;
 use FOS\RestBundle\View\View;
 use Owl\Bridge\SyliusResource\Controller\BaseController;
 use Owl\Bridge\SyliusResource\Exception\InvalidResponseException;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Owl\Bridge\SyliusResource\Controller\RequestConfiguration;
 use Owl\Bundle\UserBundle\Form\Model\ChangePassword;
 use Owl\Bundle\UserBundle\Form\Model\PasswordReset;
 use Owl\Bundle\UserBundle\Form\Model\PasswordResetRequest;
@@ -41,6 +31,7 @@ class UserController extends BaseController
 {
     public function changePasswordAction(Request $request): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         if (!$this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -85,6 +76,7 @@ class UserController extends BaseController
 
     public function resetPasswordAction(Request $request, string $token): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['passwordResetToken' => $token]);
@@ -130,6 +122,7 @@ class UserController extends BaseController
 
     public function verifyAction(Request $request, string $token): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $redirectRoute = $this->getSyliusAttribute($request, 'redirect', null);
 
@@ -170,6 +163,7 @@ class UserController extends BaseController
 
     public function requestVerificationTokenAction(Request $request): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
 
@@ -214,6 +208,7 @@ class UserController extends BaseController
 
     protected function prepareResetPasswordRequest(Request $request, GeneratorInterface $generator, string $senderEvent): Response
     {
+        /** @var RequestConfiguration $configuration */
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $passwordReset = new PasswordResetRequest();
