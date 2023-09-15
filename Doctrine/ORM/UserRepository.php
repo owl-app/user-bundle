@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * @template T of UserInterface

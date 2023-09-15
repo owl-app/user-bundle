@@ -39,7 +39,7 @@ final class UpdateUserHasherListener
         string $recommendedHasherName,
         string $className,
         string $interfaceName,
-        string $passwordParameter
+        string $passwordParameter,
     ) {
         $this->objectManager = $objectManager;
         $this->recommendedHasherName = $recommendedHasherName;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\Factory;
 
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Owl\Component\User\Model\UserInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

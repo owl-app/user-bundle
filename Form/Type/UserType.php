@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Owl\Bundle\UserBundle\Form\UserVerifiedAtToBooleanTransformer;
 use Owl\Component\User\Model\UserInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

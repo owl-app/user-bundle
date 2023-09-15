@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Owl\Bundle\UserBundle\EventListener;
 
 use Owl\Bundle\UserBundle\Mailer\Emails;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Owl\Component\User\Model\UserInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class MailerListener

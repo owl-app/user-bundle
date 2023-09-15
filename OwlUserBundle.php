@@ -42,8 +42,6 @@ final class OwlUserBundle extends AbstractResourceBundle
     /**
      * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
      *
-     * @return string
-     *
      * @psalm-return 'Owl\Component\User\Model'
      */
     protected function getModelNamespace(): string

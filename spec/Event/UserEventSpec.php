@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\Event;
 
-use PhpSpec\ObjectBehavior;
 use Owl\Component\User\Model\UserInterface;
+use PhpSpec\ObjectBehavior;
 
 final class UserEventSpec extends ObjectBehavior
 {

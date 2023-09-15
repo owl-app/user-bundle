@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace spec\Owl\Bundle\UserBundle\Reloader;
 
 use Doctrine\Persistence\ObjectManager;
-use PhpSpec\ObjectBehavior;
 use Owl\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Owl\Component\User\Model\UserInterface;
+use PhpSpec\ObjectBehavior;
 
 final class UserReloaderSpec extends ObjectBehavior
 {

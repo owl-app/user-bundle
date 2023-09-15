@@ -33,8 +33,6 @@ final class UserLoginType extends AbstractType
     }
 
     /**
-     * @return string
-     *
      * @psalm-return 'sylius_user_security_login'
      */
     public function getBlockPrefix(): string

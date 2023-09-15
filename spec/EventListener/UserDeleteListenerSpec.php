@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\EventListener;
 
+use Owl\Component\User\Model\UserInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Owl\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -37,7 +37,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted,
         UserInterface $currentlyLoggedUser,
-        TokenInterface $tokenInterface
+        TokenInterface $tokenInterface,
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
@@ -59,7 +59,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted,
-        TokenInterface $tokenInterface
+        TokenInterface $tokenInterface,
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
@@ -80,7 +80,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         FlashBagInterface $flashBag,
         ResourceControllerEvent $event,
-        UserInterface $userToBeDeleted
+        UserInterface $userToBeDeleted,
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
@@ -102,7 +102,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         UserInterface $currentlyLoggedInUser,
         $tokenStorage,
         $flashBag,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
@@ -127,7 +127,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         UserInterface $currentlyLoggedInUser,
         $tokenStorage,
         $flashBag,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);

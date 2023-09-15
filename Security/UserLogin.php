@@ -36,7 +36,7 @@ class UserLogin implements UserLoginInterface
     public function __construct(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->userChecker = $userChecker;
@@ -66,7 +66,7 @@ class UserLogin implements UserLoginInterface
             $firewallName,
             array_map(/** @param object|string $role */ static function ($role): string {
                 return (string) $role;
-            }, $user->getRoles())
+            }, $user->getRoles()),
         );
     }
 }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Owl\Bundle\UserBundle\EventListener\UpdateUserHasherListener;
 use Owl\Bundle\UserBundle\EventListener\UserDeleteListener;
 use Owl\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
@@ -27,6 +26,7 @@ use Owl\Bundle\UserBundle\Reloader\UserReloader;
 use Owl\Component\User\Security\Checker\TokenUniquenessChecker;
 use Owl\Component\User\Security\Generator\UniquePinGenerator;
 use Owl\Component\User\Security\Generator\UniqueTokenGenerator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -114,8 +114,8 @@ final class OwlUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('owl.%s_user.token_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['token']['length'],
-                ]
-            )
+                ],
+            ),
         )->setPublic(true);
 
         $container->setDefinition(
@@ -126,8 +126,8 @@ final class OwlUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('owl.%s_user.pin_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['pin']['length'],
-                ]
-            )
+                ],
+            ),
         )->setPublic(true);
 
         $container->setDefinition(
@@ -138,8 +138,8 @@ final class OwlUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('owl.%s_user.token_uniqueness_checker.email_verification', $userType)),
                     $config['verification']['token']['length'],
-                ]
-            )
+                ],
+            ),
         )->setPublic(true);
     }
 
@@ -160,7 +160,7 @@ final class OwlUserExtension extends AbstractResourceExtension
         $resetPasswordTokenUniquenessCheckerDefinition->addArgument($config['resetting']['token']['field_name']);
         $container->setDefinition(
             sprintf('owl.%s_user.token_uniqueness_checker.password_reset', $userType),
-            $resetPasswordTokenUniquenessCheckerDefinition
+            $resetPasswordTokenUniquenessCheckerDefinition,
         );
 
         $resetPasswordPinUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
@@ -168,7 +168,7 @@ final class OwlUserExtension extends AbstractResourceExtension
         $resetPasswordPinUniquenessCheckerDefinition->addArgument($config['resetting']['pin']['field_name']);
         $container->setDefinition(
             sprintf('owl.%s_user.pin_uniqueness_checker.password_reset', $userType),
-            $resetPasswordPinUniquenessCheckerDefinition
+            $resetPasswordPinUniquenessCheckerDefinition,
         );
 
         $emailVerificationTokenUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
@@ -176,7 +176,7 @@ final class OwlUserExtension extends AbstractResourceExtension
         $emailVerificationTokenUniquenessCheckerDefinition->addArgument($config['verification']['token']['field_name']);
         $container->setDefinition(
             sprintf('owl.%s_user.token_uniqueness_checker.email_verification', $userType),
-            $emailVerificationTokenUniquenessCheckerDefinition
+            $emailVerificationTokenUniquenessCheckerDefinition,
         );
     }
 
@@ -259,7 +259,7 @@ final class OwlUserExtension extends AbstractResourceExtension
             [
                 $container->getDefinition($factoryServiceId),
                 $hasher,
-            ]
+            ],
         );
         $factoryDefinition->setPublic(true);
 
@@ -279,7 +279,7 @@ final class OwlUserExtension extends AbstractResourceExtension
 
         $container->setDefinition(
             sprintf('owl.%s_user.listener.update_user_hasher', $userType),
-            $updateUserHasherListenerDefinition
+            $updateUserHasherListenerDefinition,
         );
     }
 }

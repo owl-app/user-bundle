@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\EventListener;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Owl\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Owl\Component\User\Model\UserInterface;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class UserReloaderListenerSpec extends ObjectBehavior
@@ -37,7 +37,7 @@ final class UserReloaderListenerSpec extends ObjectBehavior
 
     public function it_throws_exception_when_reloading_not_a_user_interface(
         UserReloaderInterface $userReloader,
-        GenericEvent $event
+        GenericEvent $event,
     ): void {
         $event->getSubject()->willReturn('user');
 

@@ -29,8 +29,6 @@ final class UserRequestPasswordResetType extends AbstractResourceType
     }
 
     /**
-     * @return string
-     *
      * @psalm-return 'sylius_user_request_password_reset'
      */
     public function getBlockPrefix(): string

@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Owl\Bundle\UserBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use PHPUnit\Framework\Assert;
 use Owl\Bundle\UserBundle\DependencyInjection\SyliusUserExtension;
 use Owl\Bundle\UserBundle\EventListener\UpdateUserHasherListener;
 use Owl\Bundle\UserBundle\Factory\UserWithHasherFactory;
-use Sylius\Component\Resource\Factory\Factory;
 use Owl\Component\User\Model\User;
 use Owl\Component\User\Model\UserInterface;
+use PHPUnit\Framework\Assert;
+use Sylius\Component\Resource\Factory\Factory;
 
 final class SyliusUserExtensionTest extends AbstractExtensionTestCase
 {

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Owl\Component\User\Model\UserInterface;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -26,9 +26,8 @@ final class UserDeleteListener
 {
     public function __construct(
         private TokenStorageInterface $tokenStorage,
-        private SessionInterface|RequestStack $requestStackOrSession
+        private SessionInterface|RequestStack $requestStackOrSession,
     ) {
-
     }
 
     /**

@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\Provider;
 
-use PhpSpec\ObjectBehavior;
 use Owl\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Owl\Component\User\Canonicalizer\CanonicalizerInterface;
 use Owl\Component\User\Model\User;
 use Owl\Component\User\Repository\UserRepositoryInterface;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -47,7 +47,7 @@ final class UsernameProviderSpec extends ObjectBehavior
     public function it_loads_user_by_user_name(
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
-        User $user
+        User $user,
     ): void {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
@@ -66,7 +66,7 @@ final class UsernameProviderSpec extends ObjectBehavior
     }
 
     public function it_should_throw_exception_when_unsupported_user_is_used(
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }

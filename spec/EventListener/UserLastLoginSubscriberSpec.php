@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace spec\Owl\Bundle\UserBundle\EventListener;
 
 use Doctrine\Persistence\ObjectManager;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Owl\Bundle\UserBundle\Event\UserEvent;
 use Owl\Bundle\UserBundle\UserEvents;
 use Owl\Component\User\Model\UserInterface;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -50,7 +50,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         ObjectManager $userManager,
         Request $request,
         TokenInterface $token,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $token->getUser()->willReturn($user);
 
@@ -65,7 +65,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     public function it_updates_user_last_login_on_implicit_login(
         ObjectManager $userManager,
         UserEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getUser()->willReturn($user);
 
@@ -80,7 +80,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     public function it_updates_only_sylius_user_specified_in_constructor(
         ObjectManager $userManager,
         UserEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
 
@@ -98,7 +98,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         UserEvent $event,
         Request $request,
         TokenInterface $token,
-        SymfonyUserInterface $user
+        SymfonyUserInterface $user,
     ): void {
         $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
 
@@ -116,7 +116,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         ObjectManager $userManager,
         Request $request,
         TokenInterface $token,
-        SymfonyUserInterface $user
+        SymfonyUserInterface $user,
     ): void {
         $this->beConstructedWith($userManager, SymfonyUserInterface::class);
 

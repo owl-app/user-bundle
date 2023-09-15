@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\Security;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Owl\Bundle\UserBundle\Event\UserEvent;
 use Owl\Bundle\UserBundle\Security\UserLoginInterface;
 use Owl\Bundle\UserBundle\UserEvents;
 use Owl\Component\User\Model\UserInterface;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -43,7 +43,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->willThrow(DisabledException::class);
@@ -58,7 +58,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
@@ -74,7 +74,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn([]);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
@@ -90,7 +90,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
 

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\Factory;
 
+use Owl\Component\User\Model\UserInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Owl\Component\User\Model\UserInterface;
 
 final class UserWithEncoderFactorySpec extends ObjectBehavior
 {

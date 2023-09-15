@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Owl\Bundle\UserBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Owl\Bundle\UserBundle\Controller\UserController;
-use Sylius\Component\Resource\Factory\Factory;
 use Owl\Component\User\Model\User;
 use Owl\Component\User\Model\UserInterface;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -76,7 +76,7 @@ final class Configuration implements ConfigurationInterface
                                                             /** @param mixed $tokenFieldName */
                                                             function ($tokenFieldName) {
                                                                 return !is_string($tokenFieldName);
-                                                            }
+                                                            },
                                                         )
                                                             ->thenInvalid('Invalid resetting token field "%s"')
                                                         ->end()
@@ -97,7 +97,7 @@ final class Configuration implements ConfigurationInterface
                                                             /** @param mixed $passwordResetToken */
                                                             function ($passwordResetToken) {
                                                                 return !is_string($passwordResetToken);
-                                                            }
+                                                            },
                                                         )
                                                             ->thenInvalid('Invalid resetting pin field "%s"')
                                                         ->end()
@@ -123,7 +123,7 @@ final class Configuration implements ConfigurationInterface
                                                             /** @param mixed $emailVerificationToken */
                                                             function ($emailVerificationToken) {
                                                                 return !is_string($emailVerificationToken);
-                                                            }
+                                                            },
                                                         )
                                                             ->thenInvalid('Invalid verification token field "%s"')
                                                         ->end()

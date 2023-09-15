@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Owl\Bundle\UserBundle\Security;
 
-use PhpSpec\ObjectBehavior;
 use Owl\Component\User\Model\CredentialsHolderInterface;
 use Owl\Component\User\Security\UserPasswordEncoderInterface;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
@@ -34,7 +34,7 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
     public function it_encodes_password(
         EncoderFactoryInterface $encoderFactory,
         PasswordEncoderInterface $passwordEncoder,
-        CredentialsHolderInterface $user
+        CredentialsHolderInterface $user,
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');

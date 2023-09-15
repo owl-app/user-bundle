@@ -6,8 +6,8 @@ namespace Owl\Bundle\UserBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Owl\Bridge\SyliusResource\Controller\BaseController;
-use Owl\Bridge\SyliusResource\Exception\InvalidResponseException;
 use Owl\Bridge\SyliusResource\Controller\RequestConfiguration;
+use Owl\Bridge\SyliusResource\Exception\InvalidResponseException;
 use Owl\Bundle\UserBundle\Form\Model\ChangePassword;
 use Owl\Bundle\UserBundle\Form\Model\PasswordReset;
 use Owl\Bundle\UserBundle\Form\Model\PasswordResetRequest;
@@ -54,7 +54,7 @@ class UserController extends BaseController
 
         return new Response($this->container->get('twig')->render(
             $configuration->getTemplate('changePassword.html'),
-            ['form' => $form->createView()]
+            ['form' => $form->createView()],
         ));
     }
 
@@ -116,7 +116,7 @@ class UserController extends BaseController
             [
                 'form' => $form->createView(),
                 'user' => $user,
-            ]
+            ],
         ));
     }
 
@@ -255,7 +255,7 @@ class UserController extends BaseController
                 return $this->redirectHandler->redirectToRoute(
                     $configuration,
                     $configuration->getParameters()->get('redirect')['route'],
-                    $configuration->getParameters()->get('redirect')['parameters']
+                    $configuration->getParameters()->get('redirect')['parameters'],
                 );
             }
 
@@ -270,7 +270,7 @@ class UserController extends BaseController
             $template,
             [
                 'form' => $form->createView(),
-            ]
+            ],
         ));
     }
 
@@ -286,7 +286,7 @@ class UserController extends BaseController
     protected function createResourceForm(
         RequestConfiguration $configuration,
         string $type,
-        $object
+        $object,
     ): FormInterface {
         if (!$configuration->isHtmlRequest()) {
             return $this->container->get('form.factory')->createNamed('', $type, $object, ['csrf_protection' => false]);
@@ -317,7 +317,7 @@ class UserController extends BaseController
     protected function handleResetPasswordRequest(
         GeneratorInterface $generator,
         UserInterface $user,
-        string $senderEvent
+        string $senderEvent,
     ): void {
         $user->setPasswordResetToken($generator->generate());
         $user->setPasswordRequestedAt(new \DateTime());
@@ -335,7 +335,7 @@ class UserController extends BaseController
         Request $request,
         RequestConfiguration $configuration,
         UserInterface $user,
-        string $newPassword
+        string $newPassword,
     ): Response {
         $user->setPlainPassword($newPassword);
         $user->setPasswordResetToken(null);
@@ -367,7 +367,7 @@ class UserController extends BaseController
         Request $request,
         RequestConfiguration $configuration,
         UserInterface $user,
-        string $newPassword
+        string $newPassword,
     ): Response {
         $user->setPlainPassword($newPassword);
 
@@ -405,7 +405,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @param null|string $default
+     * @param string|null $default
      */
     private function getSyliusAttribute(Request $request, string $attribute, string|null $default = null)
     {

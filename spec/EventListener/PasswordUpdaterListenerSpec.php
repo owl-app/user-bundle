@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace spec\Owl\Bundle\UserBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Owl\Component\User\Model\UserInterface;
 use Owl\Component\User\Security\PasswordUpdaterInterface;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class PasswordUpdaterListenerSpec extends ObjectBehavior
@@ -30,7 +30,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
     public function it_updates_password_for_generic_event(
         PasswordUpdaterInterface $passwordUpdater,
         GenericEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getSubject()->willReturn($user);
 
@@ -54,7 +54,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
     public function it_updates_password_on_pre_persist_doctrine_event(
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getEntity()->willReturn($user);
 
@@ -68,7 +68,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
     public function it_updates_password_on_pre_update_doctrine_event(
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getEntity()->willReturn($user);
 
@@ -81,9 +81,8 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
     public function it_updates_password_on_pre_persist_doctrine_event_for_user_interface_implementation_only(
         PasswordUpdaterInterface $passwordUpdater,
-        LifecycleEventArgs $event
-    ): void
-    {
+        LifecycleEventArgs $event,
+    ): void {
         $event->getEntity()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
@@ -92,7 +91,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
     public function it_updates_password_on_pre_update_doctrine_event_for_user_interface_implementation_only(
         PasswordUpdaterInterface $passwordUpdater,
-        LifecycleEventArgs $event
+        LifecycleEventArgs $event,
     ): void {
         $event->getEntity()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();

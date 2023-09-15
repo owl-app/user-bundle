@@ -34,7 +34,7 @@ final class RegisterPermissionProviderPass implements CompilerPassInterface
         }
 
         foreach ($userPermissionProviders as $userType => $provider) {
-            if (!isset($users[$userType ])) {
+            if (!isset($users[$userType])) {
                 throw new \InvalidArgumentException(sprintf('User %s not exists.', $userType));
             }
             $abstractProviderService = $container->findDefinition(sprintf('owl.%s_user_provider', $userType));
