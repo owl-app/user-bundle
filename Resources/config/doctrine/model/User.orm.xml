@@ -29,7 +29,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <many-to-many field="authItems" target-entity="Owl\Component\Rbac\Model\BaseAuthItem">
+        <many-to-many field="authItems" target-entity="Owl\Component\Rbac\Model\AuthItem">
             <join-table name="owl_auth_assignment">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id" />
