@@ -21,22 +21,15 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
+use Webmozart\Assert\Assert;
 
 class UserLogin implements UserLoginInterface
 {
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
-    /** @var UserCheckerInterface */
-    private $userChecker;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
     public function __construct(
-        TokenStorageInterface $tokenStorage,
-        UserCheckerInterface $userChecker,
-        EventDispatcherInterface $eventDispatcher,
+        private TokenStorageInterface $tokenStorage,
+        private UserCheckerInterface $userChecker,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->userChecker = $userChecker;
@@ -47,11 +40,12 @@ class UserLogin implements UserLoginInterface
     {
         $firewallName = $firewallName ?? 'main';
 
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
 
         $token = $this->createToken($user, $firewallName);
-        if (!$token->isAuthenticated()) {
+        if (null === $token->getUser() || [] === $token->getUser()->getRoles()) {
             throw new AuthenticationException('Unauthenticated token');
         }
 
@@ -61,12 +55,12 @@ class UserLogin implements UserLoginInterface
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
+
         return new UsernamePasswordToken(
             $user,
             $firewallName,
-            array_map(/** @param object|string $role */ static function ($role): string {
-                return (string) $role;
-            }, $user->getRoles()),
+            array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles()),
         );
     }
 }
